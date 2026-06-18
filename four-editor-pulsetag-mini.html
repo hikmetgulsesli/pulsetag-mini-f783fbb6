@@ -124,15 +124,6 @@
               })
             ]),
             el('label', { className: 'field' }, [
-              'Note',
-              el('input', {
-                type: 'text',
-                className: 'input',
-                name: 'note',
-                value: tag.note
-              })
-            ]),
-            el('label', { className: 'field' }, [
               'Status',
               el('select', { className: 'input', name: 'status' }, [
                 el('option', { value: 'active' }, 'Active'),
@@ -141,8 +132,8 @@
               ])
             ]),
             el('label', { className: 'field' }, [
-              'Details',
-              el('textarea', { className: 'input', name: 'details', rows: 4 }, tag.note || '')
+              'Note',
+              el('textarea', { className: 'input', name: 'note', rows: 4 }, tag.note || '')
             ]),
             el('div', { className: 'form-actions' }, [
               el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_CANCEL_EDIT' }, 'Cancel'),

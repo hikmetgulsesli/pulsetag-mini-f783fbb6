@@ -40,7 +40,7 @@
 
     const tagData = {
       name: name,
-      note: String(fd.get('details') || '').trim() || String(fd.get('note') || '').trim(),
+      note: String(fd.get('note') || '').trim(),
       status: String(fd.get('status') || 'active')
     };
 
@@ -59,20 +59,11 @@
 
     debouncedSave();
     stateApi.navigateTo(stateApi.SURFACES.OPERATIONS);
-  }
-
-  function onClick(e) {
-    const trigger = e.target.closest('[data-action-id="ACT_SAVE_RECORD"]');
-    if (!trigger) return;
-    const form = trigger.closest('form');
-    if (!form) return;
-    e.preventDefault();
-    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    window.location.href = 'four-operations-pulsetag-mini.html';
   }
 
   function init() {
     document.addEventListener('submit', onSubmit);
-    document.addEventListener('click', onClick);
   }
 
   if (document.readyState === 'loading') {

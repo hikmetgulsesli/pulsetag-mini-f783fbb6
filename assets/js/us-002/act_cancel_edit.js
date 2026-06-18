@@ -18,6 +18,11 @@
     const stateApi = getStateApi();
     if (!stateApi) return;
     stateApi.navigateTo(stateApi.SURFACES.OPERATIONS);
+    const storageApi = window.PulseTagMiniStorage;
+    if (storageApi) {
+      storageApi.save(stateApi);
+    }
+    window.location.href = 'four-operations-pulsetag-mini.html';
   }
 
   function init() {

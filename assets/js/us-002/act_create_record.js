@@ -19,6 +19,11 @@
     if (!stateApi) return;
     stateApi.selectTag(null);
     stateApi.navigateTo(stateApi.SURFACES.EDITOR);
+    const storageApi = window.PulseTagMiniStorage;
+    if (storageApi) {
+      storageApi.save(stateApi);
+    }
+    window.location.href = 'four-editor-pulsetag-mini.html';
   }
 
   function init() {

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Four Operations - PulseTag Mini</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div data-setfarm-root="four-operations" class="app-shell"></div>
+
+    <script src="assets/js/pulsetag-mini.state.js"></script>
+    <script src="assets/js/pulsetag-mini.storage.js"></script>
+    <script src="assets/js/us-002/act_search_records.js"></script>
+    <script src="assets/js/us-002/act_create_record.js"></script>
+    <script src="assets/js/us-002/act_select_record.js"></script>
+    <script src="assets/js/us-002/act_retry_load.js"></script>
+    <script src="assets/js/test-bridge.js"></script>
+
+    <script>
+      (function () {
+        'use strict';
+
+        const stateApi = window.PulseTagMiniState;
+        const storageApi = window.PulseTagMiniStorage;
+        if (!stateApi || !storageApi) return;
+
+        function $(selector, context) {
+          return (context || document).querySelector(selector);
+        }
+
+        function $$(selector, context) {
+          return Array.from((context || document).querySelectorAll(selector));
+        }
+
+        function el(tag, attrs, children) {
+          const node = document.createElement(tag);
+          if (attrs) {
+            Object.keys(attrs).forEach(function (key) {
+              if (key === 'className') node.className = attrs[key];
+              else if (key === 'dataset') Object.assign(node.dataset, attrs[key]);
+              else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
+              else node[key] = attrs[key];
+            });
+          }
+          (children || []).forEach(function (child) {
+            if (typeof child === 'string') node.appendChild(document.createTextNode(child));
+            else if (child) node.appendChild(child);
+          });
+          return node;
+        }
+
+        function statusClass(status) {
+          return 'status-' + status;
+        }
+
+        function capitalize(s) {
+          return String(s || '').replace(/^\w/, function (c) { return c.toUpperCase(); });
+        }
+
+        function renderAppShell() {
+          const root = $('[data-setfarm-root]');
+          if (!root) return;
+          root.innerHTML = '';
+          root.className = 'app-shell';
+
+          const header = el('header', { className: 'app-header' }, [
+            el('div', { className: 'brand' }, [el('span', { className: 'brand-mark' }, '◆'), 'PulseTag Mini']),
+            el('nav', { className: 'app-nav' }, [
+              el('a', { href: 'four-operations-pulsetag-mini.html', className: 'nav-link is-active' }, 'Operations'),
+              el('a', { href: 'four-editor-pulsetag-mini.html', className: 'nav-link' }, 'Editor'),
+              el('a', { href: '#', className: 'nav-link' }, 'Insights')
+            ]),
+            el('div', { className: 'header-actions' }, [
+              el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_EXPORT_SUMMARY' }, 'JSON Export'),
+              el('button', { className: 'btn btn-ghost', type: 'button', 'data-action-id': 'ACT_SYNC_STORAGE', title: 'sync' }, 'sync')
+            ])
+          ]);
+
+          const main = el('main', { className: 'app-main' });
+          const footer = el('footer', { className: 'app-footer' }, [
+            el('span', { 'data-testid': 'storage-status' }, 'Storage: —'),
+            el('span', { 'data-testid': 'item-counts' }, 'Tags: 0')
+          ]);
+
+          root.appendChild(header);
+          root.appendChild(main);
+          root.appendChild(footer);
+        }
+
+        function renderOperations(state) {
+          const main = $('.app-main');
+          if (!main) return;
+
+          const tags = stateApi.filteredTags();
+          const selectedTag = state.tags.find(function (t) { return t.id === state.selectedTagId; }) || null;
+
+          const toolbar = el('div', { className: 'toolbar' }, [
+            el('input', {
+              type: 'text',
+              className: 'input',
+              placeholder: 'Search records...',
+              'data-action-id': 'ACT_SEARCH_RECORDS',
+              value: state.searchQuery
+            }),
+            el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_FILTER_STATUS' }, 'Status: ' + capitalize(state.filter)),
+            el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_RETRY_LOAD' }, 'Retry Load'),
+            el('button', { className: 'btn btn-primary', type: 'button', 'data-action-id': 'ACT_CREATE_RECORD' }, 'Create New Tag')
+          ]);
+
+          const listContainer = el('div', { className: 'tag-list' });
+          if (tags.length === 0) {
+            listContainer.appendChild(el('p', { className: 'empty-state' }, 'No tags match the current filter.'));
+          } else {
+            tags.forEach(function (tag) {
+              const row = el('div', {
+                className: 'tag-row' + (selectedTag && selectedTag.id === tag.id ? ' is-selected' : ''),
+                'data-tag-id': tag.id
+              }, [
+                el('span', { className: 'status-dot ' + statusClass(tag.status) }),
+                el('span', { className: 'tag-name' }, tag.name || '(unnamed)'),
+                el('span', { className: 'status-badge ' + statusClass(tag.status) }, capitalize(tag.status)),
+                el('button', {
+                  className: 'btn btn-ghost',
+                  type: 'button',
+                  'data-action-id': 'ACT_SELECT_RECORD'
+                }, 'edit')
+              ]);
+              listContainer.appendChild(row);
+            });
+          }
+
+          const preview = el('aside', { className: 'preview-panel' }, [
+            el('h2', { className: 'panel-title' }, 'Selected'),
+            selectedTag
+              ? el('div', { className: 'preview-content' }, [
+                  el('p', null, [el('strong', null, 'Name: '), selectedTag.name || '(unnamed)']),
+                  el('p', null, [el('strong', null, 'Status: '), capitalize(selectedTag.status)]),
+                  el('p', null, [el('strong', null, 'Note: '), selectedTag.note || '—'])
+                ])
+              : el('p', { className: 'empty-state' }, 'Select a tag to preview details.')
+          ]);
+
+          main.innerHTML = '';
+          main.appendChild(toolbar);
+          const layout = el('div', { className: 'operations-layout' }, [listContainer, preview]);
+          main.appendChild(layout);
+        }
+
+        function updateChrome(state) {
+          const storageEl = $('[data-testid="storage-status"]');
+          if (storageEl) storageEl.textContent = 'Storage: ' + state.storageStatus;
+
+          const countEl = $('[data-testid="item-counts"]');
+          if (countEl) {
+            countEl.textContent = 'Tags: ' + state.counts.total + ' (active ' + state.counts.active + ', warn ' + state.counts.warn + ', fail ' + state.counts.fail + ')';
+          }
+
+          renderOperations(state);
+        }
+
+        function exportJson() {
+          const payload = stateApi.exportPayload();
+          const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'pulsetag-mini-' + Date.now() + '.json';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+
+        document.body.addEventListener('click', function (e) {
+          const target = e.target.closest('[data-action-id]');
+          if (!target) return;
+          const action = target.dataset.actionId;
+
+          if (action === 'ACT_EXPORT_SUMMARY') {
+            e.preventDefault();
+            exportJson();
+          } else if (action === 'ACT_SYNC_STORAGE') {
+            e.preventDefault();
+            storageApi.save(stateApi);
+          } else if (action === 'ACT_FILTER_STATUS') {
+            e.preventDefault();
+            const order = ['all', 'active', 'warn', 'fail'];
+            const idx = order.indexOf(stateApi.getState().filter);
+            stateApi.setFilter(order[(idx + 1) % order.length]);
+          }
+        });
+
+        stateApi.subscribe(function (state) {
+          updateChrome(state);
+        });
+
+        renderAppShell();
+        storageApi.load(stateApi, 'assets/data/pulsetag-mini.json', function () {
+          window.setfarmStaticReady = true;
+          if (window.__SETFARM_TEST_BRIDGE__) {
+            window.__SETFARM_TEST_BRIDGE__.ready = true;
+            window.__SETFARM_TEST_BRIDGE__.state = stateApi.getState();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

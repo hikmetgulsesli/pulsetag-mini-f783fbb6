@@ -95,9 +95,9 @@
         fallback(data);
       })
       .catch(function (err) {
+        fallback({ tags: [], events: [], preferences: {} });
         stateApi.setLastError(err);
         stateApi.setStorageStatus('error');
-        fallback({ tags: [], events: [], preferences: {} });
       });
   }
 

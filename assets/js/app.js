@@ -205,7 +205,9 @@
     const main = $('.app-main');
     if (!main) return;
 
-    const tag = state.tags.find((t) => t.id === state.editingTagId) || stateApi.createTag();
+    const isNew = state.editingTagId === null;
+    const existingTag = state.tags.find((t) => t.id === state.editingTagId) || null;
+    const tag = isNew ? { name: '', status: 'active', note: '' } : (existingTag || { name: '', status: 'active', note: '' });
 
     const form = el('form', { className: 'editor-form', 'data-testid': 'editor-form' }, [
       el('label', { className: 'field' }, [
@@ -256,11 +258,16 @@
         renderErrorBanner(stateApi.getState());
         return;
       }
-      stateApi.updateTag(tag.id, {
+      const tagData = {
         name: name,
         note: String(fd.get('details') || '').trim() || String(fd.get('note') || '').trim(),
         status: String(fd.get('status') || 'active')
-      });
+      };
+      if (isNew) {
+        stateApi.createTag(tagData);
+      } else if (existingTag) {
+        stateApi.updateTag(state.editingTagId, tagData);
+      }
       debouncedSave();
       stateApi.navigateTo(SURF.OPERATIONS);
     });
@@ -388,9 +395,8 @@
           break;
         case 'ACT_CREATE_RECORD':
           e.preventDefault();
-          stateApi.createTag();
+          stateApi.selectTag(null);
           stateApi.navigateTo(SURF.EDITOR);
-          debouncedSave();
           break;
         case 'ACT_RETRY_LOAD':
           e.preventDefault();

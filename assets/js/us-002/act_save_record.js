@@ -1,8 +1,9 @@
 /**
  * US-002 Action: ACT_SAVE_RECORD
  *
- * Handles form submission for the editor surface. Validates required fields,
- * persists the tag, and returns to the operations surface on success.
+ * Handles form submission for the editor surface and the operations inline
+ * editor. Validates required fields, persists the tag, and returns to the
+ * operations surface on the full editor or clears selection inline.
  */
 (function () {
   'use strict';
@@ -22,7 +23,7 @@
   }
 
   function onSubmit(e) {
-    const form = e.target.closest('[data-testid="editor-form"], form');
+    const form = e.target.closest('[data-testid="editor-form"], [data-testid="inline-editor-form"], form');
     if (!form) return;
     const saveTrigger = form.querySelector('[data-action-id="ACT_SAVE_RECORD"]');
     if (!saveTrigger) return;
@@ -31,6 +32,7 @@
     const stateApi = getStateApi();
     if (!stateApi) return;
 
+    const isInline = form.dataset.testid === 'inline-editor-form';
     const fd = new FormData(form);
     const name = String(fd.get('name') || '').trim();
     if (!name) {
@@ -38,8 +40,26 @@
       return;
     }
 
+    if (isInline) {
+      const state = stateApi.getState();
+      const selectedId = state.selectedTagId;
+      const selectedTag = state.tags.find((t) => t.id === selectedId);
+      if (!selectedTag) {
+        stateApi.setLastError(new Error('No record selected for inline edit.'));
+        return;
+      }
+      stateApi.updateTag(selectedId, {
+        name: name,
+        status: String(fd.get('status') || 'active')
+      });
+      stateApi.selectTag(null);
+      debouncedSave();
+      return;
+    }
+
     const tagData = {
       name: name,
+      code: String(fd.get('code') || '').trim(),
       note: String(fd.get('note') || '').trim(),
       status: String(fd.get('status') || 'active')
     };

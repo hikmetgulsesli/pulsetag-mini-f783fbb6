@@ -3,7 +3,7 @@
  *
  * Handles selection of an existing record. The action looks for a tag-id
  * identifier on the triggering element or an ancestor row, selects it in
- * shared state, and navigates to the editor surface.
+ * shared state, and surfaces the inline editor on the operations screen.
  */
 (function () {
   'use strict';
@@ -31,12 +31,6 @@
       return;
     }
     stateApi.selectTag(tagId);
-    stateApi.navigateTo(stateApi.SURFACES.EDITOR);
-    const storageApi = window.PulseTagMiniStorage;
-    if (storageApi) {
-      storageApi.save(stateApi);
-    }
-    window.location.href = 'four-editor-pulsetag-mini.html';
   }
 
   function init() {

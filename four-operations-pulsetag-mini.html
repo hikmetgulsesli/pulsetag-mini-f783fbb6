@@ -130,16 +130,41 @@
             });
           }
 
-          const preview = el('aside', { className: 'preview-panel' }, [
-            el('h2', { className: 'panel-title' }, 'Selected'),
-            selectedTag
-              ? el('div', { className: 'preview-content' }, [
-                  el('p', null, [el('strong', null, 'Name: '), selectedTag.name || '(unnamed)']),
-                  el('p', null, [el('strong', null, 'Status: '), capitalize(selectedTag.status)]),
-                  el('p', null, [el('strong', null, 'Note: '), selectedTag.note || '—'])
-                ])
-              : el('p', { className: 'empty-state' }, 'Select a tag to preview details.')
-          ]);
+          const preview = selectedTag
+            ? (function () {
+                const form = el('form', { className: 'editor-form', 'data-testid': 'inline-editor-form' }, [
+                  el('h2', { className: 'panel-title' }, 'Edit Tag'),
+                  el('label', { className: 'field' }, [
+                    'Name',
+                    el('input', {
+                      type: 'text',
+                      className: 'input',
+                      name: 'name',
+                      required: true,
+                      value: selectedTag.name || ''
+                    })
+                  ]),
+                  el('label', { className: 'field' }, [
+                    'Status',
+                    el('select', { className: 'input', name: 'status' }, [
+                      el('option', { value: 'active' }, 'Active'),
+                      el('option', { value: 'warn' }, 'Warn'),
+                      el('option', { value: 'fail' }, 'Fail')
+                    ])
+                  ]),
+                  el('div', { className: 'form-actions' }, [
+                    el('button', { className: 'btn btn-ghost', type: 'button', 'data-action-id': 'ACT_CANCEL_EDIT' }, 'close'),
+                    el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_CANCEL_EDIT' }, 'Discard'),
+                    el('button', { className: 'btn btn-primary', type: 'submit', 'data-action-id': 'ACT_SAVE_RECORD' }, 'Save Changes')
+                  ])
+                ]);
+                form.querySelector('[name="status"]').value = selectedTag.status;
+                return form;
+              })()
+            : el('aside', { className: 'preview-panel' }, [
+                el('h2', { className: 'panel-title' }, 'Selected'),
+                el('p', { className: 'empty-state' }, 'Select a tag to edit details.')
+              ]);
 
           main.innerHTML = '';
           main.appendChild(toolbar);

@@ -110,7 +110,7 @@
 
           const isNew = state.editingTagId === null;
           const existingTag = state.tags.find(function (t) { return t.id === state.editingTagId; }) || null;
-          const tag = isNew ? { name: '', status: 'active', note: '' } : (existingTag || { name: '', status: 'active', note: '' });
+          const tag = isNew ? { name: '', code: '', status: 'active', note: '' } : (existingTag || { name: '', code: '', status: 'active', note: '' });
 
           const form = el('form', { className: 'editor-form', 'data-testid': 'editor-form' }, [
             el('label', { className: 'field' }, [
@@ -121,6 +121,15 @@
                 name: 'name',
                 required: true,
                 value: tag.name
+              })
+            ]),
+            el('label', { className: 'field' }, [
+              'Code',
+              el('input', {
+                type: 'text',
+                className: 'input',
+                name: 'code',
+                value: tag.code || ''
               })
             ]),
             el('label', { className: 'field' }, [

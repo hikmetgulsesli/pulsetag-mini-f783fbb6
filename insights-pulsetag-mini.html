@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insights - PulseTag Mini</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div data-setfarm-root="insights" class="app-shell"></div>
+
+    <script src="assets/js/pulsetag-mini.state.js"></script>
+    <script src="assets/js/pulsetag-mini.storage.js"></script>
+    <script src="assets/js/us-003/act_filter_insights.js"></script>
+    <script src="assets/js/us-003/act_export_summary.js"></script>
+    <script src="assets/js/test-bridge.js"></script>
+
+    <script>
+      (function () {
+        'use strict';
+
+        const stateApi = window.PulseTagMiniState;
+        const storageApi = window.PulseTagMiniStorage;
+        if (!stateApi || !storageApi) return;
+
+        let insightsFilter = 'all';
+        let visibleEventCount = 6;
+
+        function $(selector, context) {
+          return (context || document).querySelector(selector);
+        }
+
+        function $$(selector, context) {
+          return Array.from((context || document).querySelectorAll(selector));
+        }
+
+        function el(tag, attrs, children) {
+          const node = document.createElement(tag);
+          if (attrs) {
+            Object.keys(attrs).forEach(function (key) {
+              if (key === 'className') node.className = attrs[key];
+              else if (key === 'dataset') Object.assign(node.dataset, attrs[key]);
+              else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
+              else node[key] = attrs[key];
+            });
+          }
+          (children || []).forEach(function (child) {
+            if (typeof child === 'string') node.appendChild(document.createTextNode(child));
+            else if (child) node.appendChild(child);
+          });
+          return node;
+        }
+
+        function statusClass(status) {
+          return 'status-' + status;
+        }
+
+        function capitalize(s) {
+          return String(s || '').replace(/^\w/, function (c) { return c.toUpperCase(); });
+        }
+
+        function fmtTime(iso) {
+          if (!iso) return '—';
+          try {
+            return new Date(iso).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+          } catch (e) {
+            return String(iso);
+          }
+        }
+
+        function renderAppShell() {
+          const root = $('[data-setfarm-root]');
+          if (!root) return;
+          root.innerHTML = '';
+          root.className = 'app-shell';
+
+          const header = el('header', { className: 'app-header' }, [
+            el('div', { className: 'brand' }, [el('span', { className: 'brand-mark' }, '◆'), 'PulseTag Mini']),
+            el('nav', { className: 'app-nav' }, [
+              el('a', { href: 'four-operations-pulsetag-mini.html', className: 'nav-link' }, 'Operations'),
+              el('a', { href: 'four-editor-pulsetag-mini.html', className: 'nav-link' }, 'Editor'),
+              el('a', { href: 'insights-pulsetag-mini.html', className: 'nav-link is-active' }, 'Insights')
+            ]),
+            el('div', { className: 'header-actions' }, [
+              el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_EXPORT_SUMMARY' }, 'JSON Export'),
+              el('button', { className: 'btn btn-ghost', type: 'button', 'data-action-id': 'ACT_FILTER_INSIGHTS' }, 'Filter: All')
+            ])
+          ]);
+
+          const main = el('main', { className: 'app-main' });
+          const footer = el('footer', { className: 'app-footer' }, [
+            el('span', { 'data-testid': 'storage-status' }, 'Storage: —'),
+            el('span', { 'data-testid': 'item-counts' }, 'Tags: 0')
+          ]);
+
+          root.appendChild(header);
+          root.appendChild(main);
+          root.appendChild(footer);
+        }
+
+        function metricCard(label, value, status) {
+          return el('div', { className: 'metric-card ' + (status ? statusClass(status) : '') }, [
+            el('span', { className: 'metric-value' }, String(value)),
+            el('span', { className: 'metric-label' }, label)
+          ]);
+        }
+
+        function filteredEvents(state) {
+          const events = state && Array.isArray(state.events) ? state.events : [];
+          if (insightsFilter === 'all') return events;
+          return events.filter(function (evt) { return evt.type === insightsFilter; });
+        }
+
+        function updateFilterButton() {
+          const btn = $('[data-action-id="ACT_FILTER_INSIGHTS"]');
+          if (!btn) return;
+          btn.textContent = 'Filter: ' + capitalize(insightsFilter);
+        }
+
+        function renderInsights(state) {
+          const main = $('.app-main');
+          if (!main || !state) return;
+
+          const counts = state.counts || { total: 0, active: 0, warn: 0, fail: 0 };
+          const allEvents = filteredEvents(state);
+          const recentEvents = allEvents.slice(0, visibleEventCount);
+          const hasMore = allEvents.length > visibleEventCount;
+
+          const metrics = el('div', { className: 'metrics' }, [
+            metricCard('Total', counts.total),
+            metricCard('Active', counts.active, 'active'),
+            metricCard('Warning', counts.warn, 'warn'),
+            metricCard('Fail', counts.fail, 'fail')
+          ]);
+
+          const eventsList = el('div', { className: 'events-list' }, [
+            el('h3', { className: 'section-title' }, 'Recent Activity')
+          ]);
+          if (recentEvents.length === 0) {
+            eventsList.appendChild(el('p', { className: 'empty-state' }, 'No events match the current filter.'));
+          } else {
+            recentEvents.forEach(function (evt) {
+              eventsList.appendChild(
+                el('div', { className: 'event-row', 'data-event-type': evt.type }, [
+                  el('span', { className: 'event-time' }, fmtTime(evt.timestamp)),
+                  el('span', { className: 'event-message' }, evt.message)
+                ])
+              );
+            });
+            if (hasMore) {
+              eventsList.appendChild(
+                el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_LOAD_MORE_EVENTS' }, 'Load More Events')
+              );
+            }
+          }
+
+          main.innerHTML = '';
+          main.appendChild(el('h2', { className: 'panel-title' }, 'Insights'));
+          main.appendChild(metrics);
+          main.appendChild(eventsList);
+          main.appendChild(
+            el('div', { className: 'form-actions' }, [
+              el('button', { className: 'btn btn-secondary', type: 'button', 'data-action-id': 'ACT_GOTO_OPERATIONS' }, 'Go to Operations')
+            ])
+          );
+
+          updateFilterButton();
+        }
+
+        function updateChrome(state) {
+          const storageEl = $('[data-testid="storage-status"]');
+          if (storageEl) storageEl.textContent = 'Storage: ' + state.storageStatus;
+
+          const countEl = $('[data-testid="item-counts"]');
+          if (countEl) {
+            countEl.textContent = 'Tags: ' + state.counts.total + ' (active ' + state.counts.active + ', warn ' + state.counts.warn + ', fail ' + state.counts.fail + ')';
+          }
+
+          renderInsights(state);
+        }
+
+        document.body.addEventListener('click', function (e) {
+          const target = e.target.closest('[data-action-id]');
+          if (!target) return;
+          const action = target.dataset.actionId;
+
+          if (action === 'ACT_GOTO_OPERATIONS') {
+            e.preventDefault();
+            stateApi.navigateTo(stateApi.SURFACES.OPERATIONS);
+            window.location.href = 'four-operations-pulsetag-mini.html';
+          } else if (action === 'ACT_LOAD_MORE_EVENTS') {
+            e.preventDefault();
+            visibleEventCount += 6;
+            renderInsights(stateApi.getState());
+          } else if (action === 'ACT_SYNC_STORAGE') {
+            e.preventDefault();
+            storageApi.save(stateApi);
+          }
+        });
+
+        document.addEventListener('pulsetag:insights:filter', function (e) {
+          insightsFilter = e.detail && e.detail.filter ? e.detail.filter : 'all';
+          visibleEventCount = 6;
+          renderInsights(stateApi.getState());
+        });
+
+        stateApi.subscribe(function (state) {
+          updateChrome(state);
+        });
+
+        renderAppShell();
+        storageApi.load(stateApi, 'assets/data/pulsetag-mini.json', function () {
+          window.setfarmStaticReady = true;
+          if (window.__SETFARM_TEST_BRIDGE__) {
+            window.__SETFARM_TEST_BRIDGE__.ready = true;
+            window.__SETFARM_TEST_BRIDGE__.state = stateApi.getState();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

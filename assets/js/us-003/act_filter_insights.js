@@ -26,9 +26,6 @@
     if (!trigger) return;
     e.preventDefault();
 
-    const stateApi = getStateApi();
-    if (!stateApi) return;
-
     const idx = FILTERS.indexOf(currentFilter);
     currentFilter = FILTERS[(idx + 1) % FILTERS.length];
     emitFilterChanged();

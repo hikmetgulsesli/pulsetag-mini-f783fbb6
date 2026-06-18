@@ -106,7 +106,7 @@
         }
 
         function filteredEvents(state) {
-          const events = Array.isArray(state.events) ? state.events : [];
+          const events = state && Array.isArray(state.events) ? state.events : [];
           if (insightsFilter === 'all') return events;
           return events.filter(function (evt) { return evt.type === insightsFilter; });
         }
@@ -119,9 +119,9 @@
 
         function renderInsights(state) {
           const main = $('.app-main');
-          if (!main) return;
+          if (!main || !state) return;
 
-          const counts = state.counts;
+          const counts = state.counts || { total: 0, active: 0, warn: 0, fail: 0 };
           const allEvents = filteredEvents(state);
           const recentEvents = allEvents.slice(0, visibleEventCount);
           const hasMore = allEvents.length > visibleEventCount;

@@ -15,6 +15,7 @@
     const stateApi = getStateApi();
     if (!stateApi) return;
 
+    if (typeof stateApi.exportPayload !== 'function') return;
     const payload = stateApi.exportPayload();
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

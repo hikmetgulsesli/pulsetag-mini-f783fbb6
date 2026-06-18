@@ -1,0 +1,64 @@
+{
+  "schema": "pulsetag-mini.data.v1",
+  "tags": [
+    {
+      "id": "tag-1",
+      "name": "Alpha",
+      "status": "active",
+      "note": "Primary monitoring tag"
+    },
+    {
+      "id": "tag-2",
+      "name": "Beta",
+      "status": "warn",
+      "note": "Threshold approaching limit"
+    },
+    {
+      "id": "tag-3",
+      "name": "Gamma",
+      "status": "fail",
+      "note": "Requires immediate review"
+    },
+    {
+      "id": "tag-4",
+      "name": "Delta",
+      "status": "active",
+      "note": "Backup tag"
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-1",
+      "tagId": "tag-1",
+      "type": "status_changed",
+      "message": "Alpha set to active",
+      "timestamp": "2026-06-18T08:00:00.000Z"
+    },
+    {
+      "id": "evt-2",
+      "tagId": "tag-2",
+      "type": "status_changed",
+      "message": "Beta set to warn",
+      "timestamp": "2026-06-18T08:05:00.000Z"
+    },
+    {
+      "id": "evt-3",
+      "tagId": "tag-3",
+      "type": "status_changed",
+      "message": "Gamma set to fail",
+      "timestamp": "2026-06-18T08:10:00.000Z"
+    },
+    {
+      "id": "evt-4",
+      "tagId": "tag-4",
+      "type": "status_changed",
+      "message": "Delta set to active",
+      "timestamp": "2026-06-18T08:15:00.000Z"
+    }
+  ],
+  "preferences": {
+    "activePanel": "operations",
+    "filter": "all",
+    "searchQuery": ""
+  }
+}

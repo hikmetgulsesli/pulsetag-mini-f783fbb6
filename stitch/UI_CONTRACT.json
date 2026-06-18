@@ -1,0 +1,419 @@
+[
+  {
+    "screenId": "0ca6bbbe11aa42e599a66357d2e87145",
+    "screenTitle": "Four Editor - PulseTag Mini",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Operations",
+        "href": "#",
+        "line": 193
+      },
+      {
+        "type": "link",
+        "label": "Editor",
+        "href": "#",
+        "line": 194
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 195
+      },
+      {
+        "type": "button",
+        "label": "JSON Export",
+        "line": 199
+      },
+      {
+        "type": "button",
+        "label": "sync",
+        "line": 202
+      },
+      {
+        "type": "button",
+        "label": "Cancel",
+        "line": 273
+      },
+      {
+        "type": "button",
+        "label": "Save Changes",
+        "line": 276
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 232
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 240
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 250
+      },
+      {
+        "type": "input",
+        "label": "textarea",
+        "inputType": "textarea",
+        "line": 265
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Operations",
+        "href": "#",
+        "line": 193
+      },
+      {
+        "type": "link",
+        "label": "Editor",
+        "href": "#",
+        "line": 194
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 195
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "JSON Export",
+        "line": 199
+      },
+      {
+        "type": "button",
+        "label": "sync",
+        "line": 202
+      },
+      {
+        "type": "button",
+        "label": "Cancel",
+        "line": 273
+      },
+      {
+        "type": "button",
+        "label": "Save Changes",
+        "line": 276
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 232
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 240
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 250
+      },
+      {
+        "type": "input",
+        "label": "textarea",
+        "inputType": "textarea",
+        "line": 265
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 11,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "8a2bb084ca8d4a3c8b92e61f08fb1cce",
+    "screenTitle": "Four Operations - PulseTag Mini",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Operations",
+        "href": "#",
+        "line": 119
+      },
+      {
+        "type": "link",
+        "label": "Editor",
+        "href": "#",
+        "line": 120
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 121
+      },
+      {
+        "type": "button",
+        "label": "JSON Export",
+        "line": 125
+      },
+      {
+        "type": "button",
+        "label": "sync",
+        "line": 126
+      },
+      {
+        "type": "button",
+        "label": "Status: All",
+        "line": 161
+      },
+      {
+        "type": "button",
+        "label": "Retry Load",
+        "line": 168
+      },
+      {
+        "type": "button",
+        "label": "Create New Tag",
+        "line": 169
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 199
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 216
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 233
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 250
+      },
+      {
+        "type": "button",
+        "label": "close",
+        "line": 264
+      },
+      {
+        "type": "button",
+        "label": "Discard",
+        "line": 295
+      },
+      {
+        "type": "button",
+        "label": "Save Changes",
+        "line": 296
+      },
+      {
+        "type": "input",
+        "label": "Search records...",
+        "inputType": "text",
+        "placeholder": "Search records...",
+        "line": 158
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 276
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 280
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Operations",
+        "href": "#",
+        "line": 119
+      },
+      {
+        "type": "link",
+        "label": "Editor",
+        "href": "#",
+        "line": 120
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 121
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "JSON Export",
+        "line": 125
+      },
+      {
+        "type": "button",
+        "label": "sync",
+        "line": 126
+      },
+      {
+        "type": "button",
+        "label": "Status: All",
+        "line": 161
+      },
+      {
+        "type": "button",
+        "label": "Retry Load",
+        "line": 168
+      },
+      {
+        "type": "button",
+        "label": "Create New Tag",
+        "line": 169
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 199
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 216
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 233
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 250
+      },
+      {
+        "type": "button",
+        "label": "close",
+        "line": 264
+      },
+      {
+        "type": "button",
+        "label": "Discard",
+        "line": 295
+      },
+      {
+        "type": "button",
+        "label": "Save Changes",
+        "line": 296
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search records...",
+        "inputType": "text",
+        "placeholder": "Search records...",
+        "line": 158
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 276
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 280
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 18,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "5e2b158d25da492d96b60314a0b31508",
+    "screenTitle": "Insights - PulseTag Mini",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "button",
+        "label": "JSON Export",
+        "line": 144
+      },
+      {
+        "type": "button",
+        "label": "ACT_FILTER_INSIGHTS",
+        "line": 159
+      },
+      {
+        "type": "button",
+        "label": "ACT_EXPORT_SUMMARY",
+        "line": 164
+      },
+      {
+        "type": "button",
+        "label": "Go to Operations",
+        "line": 231
+      },
+      {
+        "type": "button",
+        "label": "Load More Events",
+        "line": 293
+      }
+    ],
+    "navigation": [],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "JSON Export",
+        "line": 144
+      },
+      {
+        "type": "button",
+        "label": "ACT_FILTER_INSIGHTS",
+        "line": 159
+      },
+      {
+        "type": "button",
+        "label": "ACT_EXPORT_SUMMARY",
+        "line": 164
+      },
+      {
+        "type": "button",
+        "label": "Go to Operations",
+        "line": 231
+      },
+      {
+        "type": "button",
+        "label": "Load More Events",
+        "line": 293
+      }
+    ],
+    "inputs": [],
+    "hardcodedData": [],
+    "totalInteractive": 5,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  }
+]

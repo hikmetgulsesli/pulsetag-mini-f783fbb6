@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insights - PulseTag Mini</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from provided style guidance -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e4e2e4",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#d0e1fb",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f3f0f2",
+                    "on-error": "#ffffff",
+                    "surface-container": "#f0edef",
+                    "on-surface-variant": "#45464d",
+                    "outline": "#76777d",
+                    "surface-tint": "#565e74",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "tertiary": "#000000",
+                    "surface-container-high": "#eae7e9",
+                    "tertiary-container": "#271901",
+                    "on-tertiary-container": "#98805d",
+                    "on-secondary-container": "#54647a",
+                    "on-primary-fixed": "#131b2e",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c6c6cd",
+                    "surface-container-low": "#f6f3f5",
+                    "primary-fixed": "#dae2fd",
+                    "on-secondary-fixed": "#0b1c30",
+                    "surface-dim": "#dcd9db",
+                    "surface": "#fcf8fa",
+                    "on-tertiary-fixed": "#271901",
+                    "inverse-primary": "#bec6e0",
+                    "on-primary-container": "#7c839b",
+                    "surface-container-highest": "#e4e2e4",
+                    "inverse-surface": "#303032",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#131b2e",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#fcdeb5",
+                    "secondary": "#505f76",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "background": "#fcf8fa",
+                    "on-surface": "#1b1b1d",
+                    "on-background": "#1b1b1d",
+                    "surface-bright": "#fcf8fa",
+                    "on-tertiary-fixed-variant": "#574425"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin": "16px",
+                    "md": "12px",
+                    "gutter": "12px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "xl": "24px",
+                    "sm": "8px",
+                    "lg": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "data-mono": ["monospace"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-lg": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopNavBar (Generated from JSON) -->
+<nav class="bg-surface border-b border-outline-variant w-full sticky top-0 z-50 flex justify-between items-center px-lg py-sm max-w-full">
+<!-- Brand -->
+<div class="text-headline-sm font-headline-sm font-bold text-primary">
+            PulseTag Mini
+        </div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center gap-margin">
+<div class="text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:opacity-80 px-sm py-xs rounded">
+                Operations
+            </div>
+<div class="text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:opacity-80 px-sm py-xs rounded">
+                Editor
+            </div>
+<!-- Active State -->
+<div class="text-primary border-b-2 border-primary pb-1 cursor-pointer active:opacity-80 px-sm">
+                Insights
+            </div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low transition-colors p-xs rounded active:opacity-80 text-[20px]">
+                sync
+            </span>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-DEFAULT cursor-pointer hover:bg-surface-tint transition-colors active:opacity-80">
+                JSON Export
+            </button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto p-lg flex flex-col gap-xl">
+<!-- Page Header & Actions -->
+<header class="flex flex-col md:flex-row md:justify-between md:items-end gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Insights</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">System overview and event logs for PulseTag Mini.</p>
+</div>
+<div class="flex items-center gap-sm">
+<!-- Filter Button (Ghost/Secondary style) -->
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md px-md py-[6px] rounded-DEFAULT flex items-center gap-xs hover:bg-surface-container-low transition-colors h-[32px]">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                    ACT_FILTER_INSIGHTS
+                </button>
+<!-- Export Summary Action -->
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md px-md py-[6px] rounded-DEFAULT flex items-center gap-xs hover:bg-surface-container-low transition-colors h-[32px]">
+<span class="material-symbols-outlined text-[16px]">download</span>
+                    ACT_EXPORT_SUMMARY
+                </button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-margin">
+<!-- Metrics Row -->
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-xs relative overflow-hidden group">
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex justify-between items-center">
+                    System Uptime
+                    <span class="material-symbols-outlined text-[16px] text-on-surface-variant">monitor_heart</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-xs">99.98%</div>
+<div class="font-body-sm text-body-sm text-secondary">Last 30 days</div>
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-outline-variant opacity-20"></div>
+</div>
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-xs relative overflow-hidden group">
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex justify-between items-center">
+                    Total Monitored Tags
+                    <span class="material-symbols-outlined text-[16px] text-on-surface-variant">tag</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-xs">150</div>
+<div class="font-body-sm text-body-sm text-secondary">Active cluster</div>
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-outline-variant opacity-20"></div>
+</div>
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-xs relative overflow-hidden group">
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex justify-between items-center">
+                    Avg State Stability
+                    <span class="material-symbols-outlined text-[16px] text-on-surface-variant">timeline</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-xs">High</div>
+<div class="font-body-sm text-body-sm text-secondary">0.02 flapped events/hr</div>
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-outline-variant opacity-20"></div>
+</div>
+<!-- Distribution & Hint Row -->
+<div class="col-span-1 md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col justify-between gap-md">
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Current State Distribution</div>
+<!-- Horizontal Bar Visualization -->
+<div class="w-full h-[12px] flex rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<div class="bg-primary h-full" style="width: 88%;"></div>
+<div class="bg-secondary h-full" style="width: 8%;"></div>
+<div class="bg-error h-full" style="width: 4%;"></div>
+</div>
+<!-- Legend -->
+<div class="flex gap-margin items-center">
+<div class="flex items-center gap-xs font-body-sm text-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-primary"></div> Active (132)
+                    </div>
+<div class="flex items-center gap-xs font-body-sm text-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-secondary"></div> Warning (12)
+                    </div>
+<div class="flex items-center gap-xs font-body-sm text-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-error"></div> Fail (6)
+                    </div>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">info</span> Actionable Hint
+                    </div>
+<p class="font-body-sm text-body-sm text-on-surface">
+                        12 tags are in <span class="font-medium">Warning</span> state and 6 are in <span class="font-medium text-error">Fail</span> state. Review them in Operations to ensure system integrity.
+                    </p>
+</div>
+<button class="mt-md w-fit bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md px-md py-[6px] rounded-DEFAULT hover:bg-surface-container-low transition-colors h-[32px]">
+                    Go to Operations
+                </button>
+</div>
+<!-- Activity Log -->
+<div class="col-span-1 md:col-span-12 bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex justify-between items-center">
+                    Recent Activity Log
+                    <span class="font-body-sm text-body-sm text-on-surface-variant lowercase normal-case">Last 24 hours</span>
+</div>
+<!-- Data Table (High Density) -->
+<div class="flex flex-col w-full">
+<!-- Row 1 (Fail) -->
+<div class="flex items-center px-md h-[32px] border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="w-32 flex-shrink-0 font-data-mono text-data-mono text-on-surface-variant">10:42:01 UTC</div>
+<div class="flex-grow font-body-sm text-body-sm text-on-surface truncate pr-md">Tag 01 state changed to FAIL</div>
+<div class="flex-shrink-0 bg-[#ba1a1a1a] text-error font-label-sm text-label-sm px-xs py-[2px] rounded flex items-center gap-[4px]">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div> FAIL
+                        </div>
+</div>
+<!-- Row 2 (Warning) -->
+<div class="flex items-center px-md h-[32px] border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="w-32 flex-shrink-0 font-data-mono text-data-mono text-on-surface-variant">10:38:15 UTC</div>
+<div class="flex-grow font-body-sm text-body-sm text-on-surface truncate pr-md">Tag 42 battery level dropped below 15%</div>
+<div class="flex-shrink-0 bg-[#505f761a] text-secondary font-label-sm text-label-sm px-xs py-[2px] rounded flex items-center gap-[4px]">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div> WARN
+                        </div>
+</div>
+<!-- Row 3 (Info/Active) -->
+<div class="flex items-center px-md h-[32px] border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="w-32 flex-shrink-0 font-data-mono text-data-mono text-on-surface-variant">10:15:00 UTC</div>
+<div class="flex-grow font-body-sm text-body-sm text-on-surface truncate pr-md">Tag 08 successfully reconnected to gateway</div>
+<div class="flex-shrink-0 bg-[#0000001a] text-primary font-label-sm text-label-sm px-xs py-[2px] rounded flex items-center gap-[4px]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div> INFO
+                        </div>
+</div>
+<!-- Row 4 (Warning) -->
+<div class="flex items-center px-md h-[32px] border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="w-32 flex-shrink-0 font-data-mono text-data-mono text-on-surface-variant">09:55:22 UTC</div>
+<div class="flex-grow font-body-sm text-body-sm text-on-surface truncate pr-md">Tag 19 missed ping heartbeat</div>
+<div class="flex-shrink-0 bg-[#505f761a] text-secondary font-label-sm text-label-sm px-xs py-[2px] rounded flex items-center gap-[4px]">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div> WARN
+                        </div>
+</div>
+<!-- Row 5 (Fail) -->
+<div class="flex items-center px-md h-[32px] border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="w-32 flex-shrink-0 font-data-mono text-data-mono text-on-surface-variant">09:12:45 UTC</div>
+<div class="flex-grow font-body-sm text-body-sm text-on-surface truncate pr-md">Tag 05 state changed to FAIL</div>
+<div class="flex-shrink-0 bg-[#ba1a1a1a] text-error font-label-sm text-label-sm px-xs py-[2px] rounded flex items-center gap-[4px]">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div> FAIL
+                        </div>
+</div>
+<!-- Row 6 (Info/Active) -->
+<div class="flex items-center px-md h-[32px] border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="w-32 flex-shrink-0 font-data-mono text-data-mono text-on-surface-variant">08:00:00 UTC</div>
+<div class="flex-grow font-body-sm text-body-sm text-on-surface truncate pr-md">Daily automated diagnostic check completed</div>
+<div class="flex-shrink-0 bg-[#0000001a] text-primary font-label-sm text-label-sm px-xs py-[2px] rounded flex items-center gap-[4px]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div> INFO
+                        </div>
+</div>
+</div>
+<div class="p-xs flex justify-center border-t border-outline-variant bg-surface-container-lowest">
+<button class="text-on-surface-variant font-label-sm text-label-sm uppercase hover:text-primary transition-colors px-md py-xs rounded">Load More Events</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

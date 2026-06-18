@@ -1,0 +1,35 @@
+[
+  {
+    "screenId": "0ca6bbbe11aa42e599a66357d2e87145",
+    "title": "Four Editor - PulseTag Mini",
+    "htmlFile": "0ca6bbbe11aa42e599a66357d2e87145.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2U3ODI1MjViYTE4ODQ0MTVhODM2N2U5ZTUyYzE1NmM0EgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMjg0NjMwOTIyOTU1NDIwNDE1NA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/pulsetag-mini-f783fbb6/stitch/0ca6bbbe11aa42e599a66357d2e87145.html",
+    "surfaceIds": [
+      "SURF_FOUR_EDITOR"
+    ]
+  },
+  {
+    "screenId": "8a2bb084ca8d4a3c8b92e61f08fb1cce",
+    "title": "Four Operations - PulseTag Mini",
+    "htmlFile": "8a2bb084ca8d4a3c8b92e61f08fb1cce.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2UxOWNjZDFkZGIwZjQyNjhiMWE1MWUzOWU4MWIwMzE1EgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMjg0NjMwOTIyOTU1NDIwNDE1NA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/pulsetag-mini-f783fbb6/stitch/8a2bb084ca8d4a3c8b92e61f08fb1cce.html",
+    "surfaceIds": [
+      "SURF_FOUR_OPERATIONS"
+    ]
+  },
+  {
+    "screenId": "5e2b158d25da492d96b60314a0b31508",
+    "title": "Insights - PulseTag Mini",
+    "htmlFile": "5e2b158d25da492d96b60314a0b31508.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzhlN2U3ZWFhNThhZjQ1OWZhODkwMTBlM2IyMzE4ZjlkEgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMjg0NjMwOTIyOTU1NDIwNDE1NA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/pulsetag-mini-f783fbb6/stitch/5e2b158d25da492d96b60314a0b31508.html",
+    "surfaceIds": [
+      "SURF_INSIGHTS"
+    ]
+  }
+]

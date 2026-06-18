@@ -1,0 +1,29 @@
+[
+  {
+    "screenId": "0ca6bbbe11aa42e599a66357d2e87145",
+    "name": "Four Editor - PulseTag Mini",
+    "type": "form",
+    "description": "Four Editor - PulseTag Mini screen",
+    "surfaceIds": [
+      "SURF_FOUR_EDITOR"
+    ]
+  },
+  {
+    "screenId": "8a2bb084ca8d4a3c8b92e61f08fb1cce",
+    "name": "Four Operations - PulseTag Mini",
+    "type": "app-screen",
+    "description": "Four Operations - PulseTag Mini screen",
+    "surfaceIds": [
+      "SURF_FOUR_OPERATIONS"
+    ]
+  },
+  {
+    "screenId": "5e2b158d25da492d96b60314a0b31508",
+    "name": "Insights - PulseTag Mini",
+    "type": "app-screen",
+    "description": "Insights - PulseTag Mini screen",
+    "surfaceIds": [
+      "SURF_INSIGHTS"
+    ]
+  }
+]

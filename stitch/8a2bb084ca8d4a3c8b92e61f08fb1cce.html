@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Four Operations - PulseTag Mini</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2e4",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#d0e1fb",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-error": "#ffffff",
+                      "surface-container": "#f0edef",
+                      "on-surface-variant": "#45464d",
+                      "outline": "#76777d",
+                      "surface-tint": "#565e74",
+                      "surface-container-lowest": "#ffffff",
+                      "primary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "tertiary": "#000000",
+                      "surface-container-high": "#eae7e9",
+                      "tertiary-container": "#271901",
+                      "on-tertiary-container": "#98805d",
+                      "on-secondary-container": "#54647a",
+                      "on-primary-fixed": "#131b2e",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c6c6cd",
+                      "surface-container-low": "#f6f3f5",
+                      "primary-fixed": "#dae2fd",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-dim": "#dcd9db",
+                      "surface": "#fcf8fa",
+                      "on-tertiary-fixed": "#271901",
+                      "inverse-primary": "#bec6e0",
+                      "on-primary-container": "#7c839b",
+                      "surface-container-highest": "#e4e2e4",
+                      "inverse-surface": "#303032",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#131b2e",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#fcdeb5",
+                      "secondary": "#505f76",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "background": "#fcf8fa",
+                      "on-surface": "#1b1b1d",
+                      "on-background": "#1b1b1d",
+                      "surface-bright": "#fcf8fa",
+                      "on-tertiary-fixed-variant": "#574425"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin": "16px",
+                      "md": "12px",
+                      "gutter": "12px",
+                      "xs": "4px",
+                      "unit": "4px",
+                      "xl": "24px",
+                      "sm": "8px",
+                      "lg": "16px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "data-mono": ["monospace"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-lg py-sm max-w-full shrink-0">
+<div class="flex items-center gap-xl">
+<span class="text-headline-sm font-headline-sm font-bold text-primary">PulseTag Mini</span>
+<nav class="hidden md:flex gap-lg h-full items-end">
+<a class="text-primary border-b-2 border-primary pb-1 font-body-md text-body-md cursor-pointer active:opacity-80" href="#">Operations</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors pb-1 border-b-2 border-transparent font-body-md text-body-md cursor-pointer active:opacity-80" href="#">Editor</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors pb-1 border-b-2 border-transparent font-body-md text-body-md cursor-pointer active:opacity-80" href="#">Insights</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="font-label-sm text-label-sm uppercase text-secondary border border-outline-variant rounded px-sm py-xs hover:bg-surface-container-low transition-colors">JSON Export</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors p-xs rounded cursor-pointer active:opacity-80 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto p-margin gap-margin">
+<!-- Summary Metrics -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md shrink-0">
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Tags</span>
+<span class="font-headline-md text-headline-md text-primary">1,204</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active</span>
+<span class="font-headline-md text-headline-md text-primary">1,180</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Warning</span>
+<span class="font-headline-md text-headline-md text-tertiary-container">21</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Fail States</span>
+<span class="font-headline-md text-headline-md text-error">3</span>
+</div>
+</div>
+<!-- Toolbar -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md shrink-0">
+<div class="flex items-center gap-md w-full md:w-auto">
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full pl-xl pr-sm py-xs h-[32px] bg-surface-container-lowest border border-outline-variant rounded text-body-sm font-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface placeholder:text-outline-variant" data-action="ACT_SEARCH_RECORDS" placeholder="Search records..." type="text"/>
+</div>
+<div class="hidden md:flex gap-xs">
+<button class="bg-surface-container-lowest border border-outline-variant rounded px-sm h-[32px] font-label-md text-label-md text-on-surface flex items-center gap-xs hover:bg-surface-container-low">
+<span>Status: All</span>
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="bg-surface-container-lowest border border-outline-variant rounded px-sm h-[32px] font-label-md text-label-md text-primary hover:bg-surface-container-low transition-colors" data-action="ACT_RETRY_LOAD">Retry Load</button>
+<button class="bg-primary text-on-primary rounded px-md h-[32px] font-label-md text-label-md hover:bg-primary/90 transition-colors" data-action="ACT_CREATE_RECORD">Create New Tag</button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded overflow-hidden flex-1 flex flex-col min-h-0">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low">
+<th class="font-label-sm text-label-sm text-on-surface-variant uppercase py-sm px-md font-semibold">ID</th>
+<th class="font-label-sm text-label-sm text-on-surface-variant uppercase py-sm px-md font-semibold">Name</th>
+<th class="font-label-sm text-label-sm text-on-surface-variant uppercase py-sm px-md font-semibold">Status</th>
+<th class="font-label-sm text-label-sm text-on-surface-variant uppercase py-sm px-md font-semibold text-right">Value</th>
+<th class="font-label-sm text-label-sm text-on-surface-variant uppercase py-sm px-md font-semibold">Last Activity</th>
+<th class="py-sm px-md w-10"></th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<tr class="border-b border-outline-variant hover:bg-surface-container-lowest transition-colors bg-surface-container-low">
+<td class="py-xs px-md font-data-mono text-data-mono text-on-surface-variant">PTM-8921</td>
+<td class="py-xs px-md text-on-surface">Alpha Node Sensor</td>
+<td class="py-xs px-md">
+<div class="inline-flex items-center gap-xs px-sm py-[2px] rounded bg-[#d3e4fe]/30 border border-[#d3e4fe]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<span class="font-label-md text-label-md text-primary">Active</span>
+</div>
+</td>
+<td class="py-xs px-md font-data-mono text-data-mono text-right text-on-surface">42.8v</td>
+<td class="py-xs px-md text-on-surface-variant">2 mins ago</td>
+<td class="py-xs px-md text-right">
+<button class="text-outline hover:text-primary transition-colors p-unit" data-action="ACT_SELECT_RECORD">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="py-xs px-md font-data-mono text-data-mono text-on-surface-variant">PTM-8922</td>
+<td class="py-xs px-md text-on-surface">Beta Relay Point</td>
+<td class="py-xs px-md">
+<div class="inline-flex items-center gap-xs px-sm py-[2px] rounded bg-tertiary-fixed/30 border border-tertiary-fixed">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></div>
+<span class="font-label-md text-label-md text-tertiary-container">Warning</span>
+</div>
+</td>
+<td class="py-xs px-md font-data-mono text-data-mono text-right text-on-surface">38.1v</td>
+<td class="py-xs px-md text-on-surface-variant">15 mins ago</td>
+<td class="py-xs px-md text-right">
+<button class="text-outline hover:text-primary transition-colors p-unit" data-action="ACT_SELECT_RECORD">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="py-xs px-md font-data-mono text-data-mono text-on-surface-variant">PTM-8923</td>
+<td class="py-xs px-md text-on-surface">Gamma Processor</td>
+<td class="py-xs px-md">
+<div class="inline-flex items-center gap-xs px-sm py-[2px] rounded bg-[#d3e4fe]/30 border border-[#d3e4fe]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<span class="font-label-md text-label-md text-primary">Active</span>
+</div>
+</td>
+<td class="py-xs px-md font-data-mono text-data-mono text-right text-on-surface">45.0v</td>
+<td class="py-xs px-md text-on-surface-variant">1 hr ago</td>
+<td class="py-xs px-md text-right">
+<button class="text-outline hover:text-primary transition-colors p-unit" data-action="ACT_SELECT_RECORD">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="py-xs px-md font-data-mono text-data-mono text-on-surface-variant">PTM-8924</td>
+<td class="py-xs px-md text-on-surface">Delta Core Link</td>
+<td class="py-xs px-md">
+<div class="inline-flex items-center gap-xs px-sm py-[2px] rounded bg-error-container/30 border border-error-container">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+<span class="font-label-md text-label-md text-error">Fail</span>
+</div>
+</td>
+<td class="py-xs px-md font-data-mono text-data-mono text-right text-on-surface">0.0v</td>
+<td class="py-xs px-md text-on-surface-variant">4 hrs ago</td>
+<td class="py-xs px-md text-right">
+<button class="text-outline hover:text-primary transition-colors p-unit" data-action="ACT_SELECT_RECORD">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Inspector Panel (Sidebar) -->
+<aside class="hidden lg:flex w-[320px] bg-surface-container-lowest border-l border-outline-variant flex-col shrink-0 overflow-y-auto">
+<div class="p-margin border-b border-outline-variant flex justify-between items-center bg-surface sticky top-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Inspector</span>
+<button class="text-outline hover:text-primary transition-colors p-unit">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-margin flex flex-col gap-lg">
+<!-- Selected Item Details -->
+<div class="flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Record ID</span>
+<span class="font-data-mono text-data-mono text-on-surface">PTM-8921</span>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Device Name</span>
+<input class="w-full px-sm py-xs h-[32px] bg-surface border border-outline-variant rounded text-body-sm font-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface" type="text" value="Alpha Node Sensor"/>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Status Configuration</span>
+<select class="w-full px-sm py-xs h-[32px] bg-surface border border-outline-variant rounded text-body-sm font-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface appearance-none">
+<option selected="">Active (Normal Operation)</option>
+<option>Warning (Threshold Exceeded)</option>
+<option>Fail (Unresponsive)</option>
+<option>Maintenance</option>
+</select>
+</div>
+<div class="h-px w-full bg-outline-variant my-xs"></div>
+<div class="flex flex-col gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Telemetry History</span>
+<div class="bg-surface border border-outline-variant rounded h-32 w-full p-sm flex items-center justify-center relative overflow-hidden" data-alt="A minimalist data visualization chart showing a stable voltage line graph in dark slate over a light gray background, indicating normal operational telemetry for a sensor.">
+<span class="text-on-surface-variant font-label-md text-label-md">[Chart Render Area]</span>
+</div>
+</div>
+<div class="mt-auto pt-margin flex gap-sm">
+<button class="flex-1 bg-surface-container-lowest border border-outline-variant rounded h-[32px] font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors">Discard</button>
+<button class="flex-1 bg-primary text-on-primary rounded h-[32px] font-label-md text-label-md hover:bg-primary/90 transition-colors">Save Changes</button>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Four Editor - PulseTag Mini</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2e4",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#d0e1fb",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-error": "#ffffff",
+                      "surface-container": "#f0edef",
+                      "on-surface-variant": "#45464d",
+                      "outline": "#76777d",
+                      "surface-tint": "#565e74",
+                      "surface-container-lowest": "#ffffff",
+                      "primary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "tertiary": "#000000",
+                      "surface-container-high": "#eae7e9",
+                      "tertiary-container": "#271901",
+                      "on-tertiary-container": "#98805d",
+                      "on-secondary-container": "#54647a",
+                      "on-primary-fixed": "#131b2e",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c6c6cd",
+                      "surface-container-low": "#f6f3f5",
+                      "primary-fixed": "#dae2fd",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-dim": "#dcd9db",
+                      "surface": "#fcf8fa",
+                      "on-tertiary-fixed": "#271901",
+                      "inverse-primary": "#bec6e0",
+                      "on-primary-container": "#7c839b",
+                      "surface-container-highest": "#e4e2e4",
+                      "inverse-surface": "#303032",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#131b2e",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#fcdeb5",
+                      "secondary": "#505f76",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "background": "#fcf8fa",
+                      "on-surface": "#1b1b1d",
+                      "on-background": "#1b1b1d",
+                      "surface-bright": "#fcf8fa",
+                      "on-tertiary-fixed-variant": "#574425"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin": "16px",
+                      "md": "12px",
+                      "gutter": "12px",
+                      "xs": "4px",
+                      "unit": "4px",
+                      "xl": "24px",
+                      "sm": "8px",
+                      "lg": "16px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "data-mono": [
+                              "monospace"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.03em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "15px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface min-h-screen flex flex-col font-body-md text-body-md text-on-surface antialiased">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flat no shadows docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-full">
+<div class="flex items-center gap-xl">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">PulseTag Mini</span>
+<div class="hidden md:flex gap-lg items-center text-primary dark:text-inverse-primary font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 px-md py-sm rounded-DEFAULT" href="#">Operations</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 px-md py-sm" href="#">Editor</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 px-md py-sm rounded-DEFAULT" href="#">Insights</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="font-label-md text-label-md text-primary dark:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 px-md py-xs rounded-DEFAULT border border-outline-variant">
+                    JSON Export
+                </button>
+<button class="text-primary dark:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center p-xl">
+<!-- Editor Container -->
+<div class="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col shadow-sm">
+<!-- Header Area -->
+<div class="px-xl py-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Edit Tag: Four</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Modify parameters for node identification.</p>
+</div>
+<!-- Unsaved Banner -->
+<div class="flex items-center gap-sm bg-error-container/20 border border-outline-variant px-md py-xs rounded-DEFAULT">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Unsaved changes</span>
+</div>
+</div>
+<!-- Form Area -->
+<div class="p-xl flex flex-col gap-xl">
+<!-- Tag Name Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface flex justify-between" for="tagName">
+<span>Tag Name</span>
+<span class="text-on-surface-variant">* Required</span>
+</label>
+<input class="h-8 px-md font-body-sm text-body-sm border border-outline-variant rounded-DEFAULT bg-surface-container-lowest focus:outline-none focus:border-primary focus:ring-2 focus:ring-secondary-container/50 transition-all w-full text-on-surface" id="tagName" type="text" value="Four"/>
+</div>
+<!-- Tag ID Field (with error) -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-error flex justify-between" for="tagId">
+<span>Tag ID</span>
+<span class="text-error">* Required</span>
+</label>
+<input class="h-8 px-md font-body-sm text-body-sm border border-error rounded-DEFAULT bg-surface-container-lowest focus:outline-none focus:border-error focus:ring-2 focus:ring-error-container transition-all w-full text-on-surface" id="tagId" type="text" value="TAG-004-DUP"/>
+<span class="font-label-md text-label-md text-error flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                        ID must be unique. 'TAG-004-DUP' is already assigned.
+                    </span>
+</div>
+<!-- Initial State Select -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="initialState">Initial State</label>
+<div class="relative w-full">
+<select class="appearance-none h-8 px-md font-body-sm text-body-sm border border-outline-variant rounded-DEFAULT bg-surface-container-lowest focus:outline-none focus:border-primary focus:ring-2 focus:ring-secondary-container/50 transition-all w-full text-on-surface pr-xl" id="initialState">
+<option selected="" value="active">Active</option>
+<option value="warn">Warn</option>
+<option value="fail">Fail</option>
+<option value="dormant">Dormant</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 transform -translate-y-1/2 text-on-surface-variant pointer-events-none" style="font-size: 18px;">expand_more</span>
+</div>
+</div>
+<!-- Metadata Textarea -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface flex justify-between" for="metadata">
+<span>Metadata (JSON)</span>
+<span class="text-on-surface-variant">Optional</span>
+</label>
+<textarea class="p-md font-data-mono text-data-mono border border-outline-variant rounded-DEFAULT bg-surface-container-lowest focus:outline-none focus:border-primary focus:ring-2 focus:ring-secondary-container/50 transition-all w-full text-on-surface resize-y" id="metadata" rows="4">{
+  "location": "Sector 7G",
+  "priority": "High"
+}</textarea>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="px-xl py-lg border-t border-outline-variant flex justify-end gap-md bg-surface-container-low">
+<button class="px-lg py-sm font-label-md text-label-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors" type="button">
+                    Cancel
+                </button>
+<button class="px-lg py-sm font-label-md text-label-md text-on-primary bg-primary rounded-DEFAULT hover:opacity-90 transition-opacity" type="button">
+                    Save Changes
+                </button>
+</div>
+</div>
+</main>
+</body></html>

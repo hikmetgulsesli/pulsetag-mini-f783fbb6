@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Four Operations - PulseTag Mini</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell" data-setfarm-root="baseline" data-testid="setfarm-app-root">
+      <header class="app-header">
+        <div class="brand"><span class="brand-mark">◆</span>PulseTag Mini</div>
+        <nav class="app-nav" role="tablist" aria-label="Primary">
+          <a href="four-operations-pulsetag-mini.html" class="nav-link is-active" role="tab" data-panel="operations" data-surface="SURF_FOUR_OPERATIONS" aria-selected="true">Operations</a>
+          <a href="four-editor-pulsetag-mini.html" class="nav-link" role="tab" data-panel="editor" data-surface="SURF_FOUR_EDITOR" aria-selected="false">Editor</a>
+          <a href="index.html" class="nav-link" role="tab" data-panel="insights" data-surface="SURF_INSIGHTS" aria-selected="false">Insights</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn btn-secondary" type="button" data-action-id="ACT_EXPORT_SUMMARY">JSON Export</button>
+          <button class="btn btn-ghost" type="button" data-action-id="ACT_SYNC_STORAGE" title="sync">sync</button>
+        </div>
+      </header>
+
+      <main class="app-main" data-testid="app-main">
+        <div class="toolbar">
+          <input type="text" class="input" placeholder="Search records..." data-action-id="ACT_SEARCH_RECORDS" data-testid="search-records" />
+          <button class="btn btn-secondary" type="button" data-action-id="ACT_FILTER_STATUS" data-testid="filter-status">Status: All</button>
+          <button class="btn btn-secondary" type="button" data-action-id="ACT_RETRY_LOAD" data-testid="retry-load">Retry Load</button>
+          <button class="btn btn-primary" type="button" data-action-id="ACT_CREATE_RECORD" data-testid="create-record">Create New Tag</button>
+        </div>
+
+        <div class="operations-layout">
+          <div class="tag-list" data-testid="tag-list"></div>
+          <aside class="preview-panel" data-testid="preview-panel">
+            <h2 class="panel-title">Selected</h2>
+            <p class="empty-state" data-testid="preview-empty">Select a tag to preview details.</p>
+            <div class="preview-content" data-testid="preview-content" hidden></div>
+          </aside>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <span data-testid="storage-status">Storage: —</span>
+        <span data-testid="item-counts">Tags: 0</span>
+      </footer>
+    </div>
+
+    <script src="assets/js/pulsetag-mini.state.js"></script>
+    <script src="assets/js/pulsetag-mini.storage.js"></script>
+    <script src="assets/js/us-002/act_search_records.js"></script>
+    <script src="assets/js/us-002/act_create_record.js"></script>
+    <script src="assets/js/us-002/act_select_record.js"></script>
+    <script src="assets/js/us-002/act_retry_load.js"></script>
+    <script>
+      (function () {
+        'use strict';
+        const stateApi = window.PulseTagMiniState;
+        const storageApi = window.PulseTagMiniStorage;
+        if (!stateApi || !storageApi) return;
+
+        function capitalize(s) {
+          return String(s || '').replace(/^\w/, (c) => c.toUpperCase());
+        }
+
+        function statusClass(status) {
+          return 'status-' + status;
+        }
+
+        function el(tag, attrs, children) {
+          const node = document.createElement(tag);
+          if (attrs) {
+            Object.keys(attrs).forEach(function (key) {
+              if (key === 'className') node.className = attrs[key];
+              else if (key === 'dataset') Object.assign(node.dataset, attrs[key]);
+              else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
+              else node[key] = attrs[key];
+            });
+          }
+          (children || []).forEach(function (child) {
+            if (typeof child === 'string') node.appendChild(document.createTextNode(child));
+            else if (child) node.appendChild(child);
+          });
+          return node;
+        }
+
+        function updateChrome(state) {
+          const storageEl = document.querySelector('[data-testid="storage-status"]');
+          if (storageEl) storageEl.textContent = 'Storage: ' + state.storageStatus;
+
+          const countEl = document.querySelector('[data-testid="item-counts"]');
+          if (countEl) {
+            countEl.textContent = 'Tags: ' + state.counts.total + ' (active ' + state.counts.active + ', warn ' + state.counts.warn + ', fail ' + state.counts.fail + ')';
+          }
+
+          const filterBtn = document.querySelector('[data-action-id="ACT_FILTER_STATUS"]');
+          if (filterBtn) filterBtn.textContent = 'Status: ' + capitalize(state.filter);
+
+          const searchInput = document.querySelector('[data-action-id="ACT_SEARCH_RECORDS"]');
+          if (searchInput && searchInput.value !== state.searchQuery) {
+            searchInput.value = state.searchQuery;
+          }
+        }
+
+        function renderPreview(selectedTag) {
+          const emptyEl = document.querySelector('[data-testid="preview-empty"]');
+          const contentEl = document.querySelector('[data-testid="preview-content"]');
+          if (!emptyEl || !contentEl) return;
+
+          if (!selectedTag) {
+            emptyEl.hidden = false;
+            contentEl.hidden = true;
+            contentEl.innerHTML = '';
+            return;
+          }
+
+          emptyEl.hidden = true;
+          contentEl.hidden = false;
+          contentEl.innerHTML = '';
+          contentEl.appendChild(el('p', null, [el('strong', null, 'Name: '), selectedTag.name || '(unnamed)']));
+          contentEl.appendChild(el('p', null, [el('strong', null, 'Status: '), capitalize(selectedTag.status)]));
+          contentEl.appendChild(el('p', null, [el('strong', null, 'Note: '), selectedTag.note || '—']));
+        }
+
+        function renderTagList(state) {
+          const tags = stateApi.filteredTags();
+          const selectedTag = state.tags.find((t) => t.id === state.selectedTagId) || null;
+          const listEl = document.querySelector('[data-testid="tag-list"]');
+          if (!listEl) return;
+          listEl.innerHTML = '';
+
+          if (tags.length === 0) {
+            listEl.appendChild(el('p', { className: 'empty-state' }, 'No tags match the current filter.'));
+          } else {
+            tags.forEach(function (tag) {
+              const row = el('div', {
+                className: 'tag-row ' + (selectedTag && selectedTag.id === tag.id ? 'is-selected' : ''),
+                dataset: { tagId: tag.id },
+                'data-tag-id': tag.id
+              }, [
+                el('span', { className: 'status-dot ' + statusClass(tag.status) }),
+                el('span', { className: 'tag-name' }, tag.name || '(unnamed)'),
+                el('span', { className: 'status-badge ' + statusClass(tag.status) }, capitalize(tag.status)),
+                el('button', {
+                  className: 'btn btn-ghost',
+                  type: 'button',
+                  'data-action-id': 'ACT_SELECT_RECORD'
+                }, 'edit')
+              ]);
+              row.addEventListener('click', function (e) {
+                if (!e.target.closest('button')) {
+                  stateApi.selectTag(tag.id);
+                }
+              });
+              listEl.appendChild(row);
+            });
+          }
+
+          renderPreview(selectedTag);
+        }
+
+        function render(state) {
+          updateChrome(state);
+          renderTagList(state);
+        }
+
+        stateApi.subscribe(function (state) {
+          render(state);
+        });
+
+        storageApi.load(stateApi, 'assets/data/pulsetag-mini.json', function () {
+          render(stateApi.getState());
+          window.setfarmStaticReady = true;
+          if (window.__SETFARM_TEST_BRIDGE__) {
+            window.__SETFARM_TEST_BRIDGE__.ready = true;
+            window.__SETFARM_TEST_BRIDGE__.state = stateApi.getState();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

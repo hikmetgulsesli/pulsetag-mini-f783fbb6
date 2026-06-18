@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Four Editor - PulseTag Mini</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell" data-setfarm-root="baseline" data-testid="setfarm-app-root">
+      <header class="app-header">
+        <div class="brand"><span class="brand-mark">◆</span>PulseTag Mini</div>
+        <nav class="app-nav" role="tablist" aria-label="Primary">
+          <a href="four-operations-pulsetag-mini.html" class="nav-link" role="tab" data-panel="operations" data-surface="SURF_FOUR_OPERATIONS" aria-selected="false">Operations</a>
+          <a href="four-editor-pulsetag-mini.html" class="nav-link is-active" role="tab" data-panel="editor" data-surface="SURF_FOUR_EDITOR" aria-selected="true">Editor</a>
+          <a href="index.html" class="nav-link" role="tab" data-panel="insights" data-surface="SURF_INSIGHTS" aria-selected="false">Insights</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn btn-secondary" type="button" data-action-id="ACT_EXPORT_SUMMARY">JSON Export</button>
+          <button class="btn btn-ghost" type="button" data-action-id="ACT_SYNC_STORAGE" title="sync">sync</button>
+        </div>
+      </header>
+
+      <main class="app-main" data-testid="app-main">
+        <h2 class="panel-title">Four Editor</h2>
+        <form class="editor-form" data-testid="editor-form" data-action-id="ACT_SAVE_RECORD">
+          <label class="field">
+            Name
+            <input type="text" class="input" name="name" required data-testid="editor-name" />
+          </label>
+          <label class="field">
+            Note
+            <input type="text" class="input" name="note" data-testid="editor-note" />
+          </label>
+          <label class="field">
+            Status
+            <select class="input" name="status" data-testid="editor-status">
+              <option value="active">Active</option>
+              <option value="warn">Warning</option>
+              <option value="fail">Fail</option>
+            </select>
+          </label>
+          <label class="field">
+            Details
+            <textarea class="input" name="details" rows="4" data-testid="editor-details"></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="btn btn-secondary" type="button" data-action-id="ACT_CANCEL_EDIT">Cancel</button>
+            <button class="btn btn-primary" type="submit" data-action-id="ACT_SAVE_RECORD">Save Changes</button>
+          </div>
+        </form>
+      </main>
+
+      <footer class="app-footer">
+        <span data-testid="storage-status">Storage: —</span>
+        <span data-testid="item-counts">Tags: 0</span>
+      </footer>
+    </div>
+
+    <script src="assets/js/pulsetag-mini.state.js"></script>
+    <script src="assets/js/pulsetag-mini.storage.js"></script>
+    <script src="assets/js/us-002/act_save_record.js"></script>
+    <script src="assets/js/us-002/act_cancel_edit.js"></script>
+    <script>
+      (function () {
+        'use strict';
+        const stateApi = window.PulseTagMiniState;
+        const storageApi = window.PulseTagMiniStorage;
+        if (!stateApi || !storageApi) return;
+
+        function capitalize(s) {
+          return String(s || '').replace(/^\w/, (c) => c.toUpperCase());
+        }
+
+        function updateChrome(state) {
+          const storageEl = document.querySelector('[data-testid="storage-status"]');
+          if (storageEl) storageEl.textContent = 'Storage: ' + state.storageStatus;
+
+          const countEl = document.querySelector('[data-testid="item-counts"]');
+          if (countEl) {
+            countEl.textContent = 'Tags: ' + state.counts.total + ' (active ' + state.counts.active + ', warn ' + state.counts.warn + ', fail ' + state.counts.fail + ')';
+          }
+        }
+
+        function fillForm(state) {
+          const isNew = state.editingTagId === null;
+          const tag = isNew
+            ? { name: '', status: 'active', note: '' }
+            : state.tags.find((t) => t.id === state.editingTagId) || { name: '', status: 'active', note: '' };
+
+          const form = document.querySelector('[data-testid="editor-form"]');
+          if (!form) return;
+
+          const nameInput = form.querySelector('[name="name"]');
+          const noteInput = form.querySelector('[name="note"]');
+          const statusInput = form.querySelector('[name="status"]');
+          const detailsInput = form.querySelector('[name="details"]');
+
+          if (nameInput) nameInput.value = tag.name || '';
+          if (noteInput) noteInput.value = tag.note || '';
+          if (statusInput) statusInput.value = tag.status || 'active';
+          if (detailsInput) detailsInput.value = tag.note || '';
+        }
+
+        function render(state) {
+          updateChrome(state);
+          fillForm(state);
+        }
+
+        stateApi.subscribe(function (state) {
+          render(state);
+        });
+
+        storageApi.load(stateApi, 'assets/data/pulsetag-mini.json', function () {
+          render(stateApi.getState());
+          window.setfarmStaticReady = true;
+          if (window.__SETFARM_TEST_BRIDGE__) {
+            window.__SETFARM_TEST_BRIDGE__.ready = true;
+            window.__SETFARM_TEST_BRIDGE__.state = stateApi.getState();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

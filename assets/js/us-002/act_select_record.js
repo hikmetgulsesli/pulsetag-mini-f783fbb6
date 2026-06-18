@@ -21,6 +21,8 @@
       const tagId = row ? row.getAttribute('data-tag-id') : null;
       if (!tagId) return;
 
+      // PulseTagMiniState.selectTag updates both selectedTagId and editingTagId,
+      // which is what the editor page reads to load the tag being edited.
       stateApi.selectTag(tagId);
       if (storageApi) storageApi.save(stateApi);
       window.location.href = 'four-editor-pulsetag-mini.html';

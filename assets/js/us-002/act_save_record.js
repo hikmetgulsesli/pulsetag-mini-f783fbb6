@@ -22,7 +22,8 @@
 
     const tagData = {
       name: name,
-      note: String(fd.get('details') || '').trim() || String(fd.get('note') || '').trim(),
+      note: String(fd.get('note') || '').trim(),
+      details: String(fd.get('details') || '').trim(),
       status: String(fd.get('status') || 'active')
     };
 
@@ -47,16 +48,6 @@
       if (action === 'ACT_SAVE_RECORD' || formAction === 'ACT_SAVE_RECORD') {
         e.preventDefault();
         saveRecord(e.target);
-      }
-    });
-
-    document.body.addEventListener('click', function (e) {
-      const target = e.target.closest('[data-action-id="ACT_SAVE_RECORD"]');
-      if (!target || target.tagName.toLowerCase() === 'form') return;
-      const form = target.closest('form');
-      if (form) {
-        e.preventDefault();
-        saveRecord(form);
       }
     });
   }

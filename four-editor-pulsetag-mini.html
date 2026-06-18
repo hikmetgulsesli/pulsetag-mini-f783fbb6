@@ -85,8 +85,8 @@
         function fillForm(state) {
           const isNew = state.editingTagId === null;
           const tag = isNew
-            ? { name: '', status: 'active', note: '' }
-            : state.tags.find((t) => t.id === state.editingTagId) || { name: '', status: 'active', note: '' };
+            ? { name: '', status: 'active', note: '', details: '' }
+            : state.tags.find((t) => t.id === state.editingTagId) || { name: '', status: 'active', note: '', details: '' };
 
           const form = document.querySelector('[data-testid="editor-form"]');
           if (!form) return;
@@ -99,7 +99,7 @@
           if (nameInput) nameInput.value = tag.name || '';
           if (noteInput) noteInput.value = tag.note || '';
           if (statusInput) statusInput.value = tag.status || 'active';
-          if (detailsInput) detailsInput.value = tag.note || '';
+          if (detailsInput) detailsInput.value = tag.details || '';
         }
 
         function render(state) {

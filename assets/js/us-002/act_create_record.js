@@ -17,8 +17,10 @@
       const storageApi = window.PulseTagMiniStorage;
       if (!stateApi) return;
 
-      // Passing null clears both selectedTagId and editingTagId so the editor
-      // starts a new tag session instead of loading a previously edited tag.
+      // Passing null to PulseTagMiniState.selectTag clears both selectedTagId
+      // and editingTagId, so the editor starts a new tag session instead of
+      // loading a previously edited tag. There is no separate clearEditingTag
+      // API; selectTag(null) is the canonical way to reset edit mode.
       stateApi.selectTag(null);
       if (storageApi) storageApi.save(stateApi);
       window.location.href = 'four-editor-pulsetag-mini.html';
